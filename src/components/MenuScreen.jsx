@@ -1,7 +1,16 @@
 import * as React from "react";
 
-function Menu() {
-  return (
+export default function MenuScreen() {
+  /*return(
+    <div>
+      <h1>Our menu screen</h1>
+    </div>
+  )
+}
+
+//export default MenuScreen;*/
+
+return (
     <div className="flex flex-col justify-center bg-white max-w-[360px]">
       <div className="flex flex-col items-center px-6 pt-4 pb-20 w-full bg-sky-300">
         <div className="flex gap-5 justify-between items-center self-stretch w-full text-xl">
