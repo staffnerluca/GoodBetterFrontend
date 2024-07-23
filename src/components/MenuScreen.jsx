@@ -1,14 +1,37 @@
 import * as React from "react";
+import { useState } from "react";
+
 
 export default function MenuScreen() {
-  /*return(
-    <div>
-      <h1>Our menu screen</h1>
-    </div>
-  )
+const [userState, setUserState] = useState({"state": "loading"})
+const [goodThings, setGoodThings] = useState({});
+
+async function loadUser(){
+  try{
+    const user = await getUserFromServer();
+    setUserState(user);
+  } catch(error){
+    alert("Not able to laod data from server");
+    const loadingErroUser = {
+      doing_good_score: "not able to load",
+      doing_good_streak: "not able to load",
+      wants_to_become_vegetarian: "not able to load",
+      not_eating_meat_streak: "not able to load"
+    }
+  }
 }
 
-//export default MenuScreen;*/
+async function loadGoodThings(){
+  try{
+    const goodThings = await getGoodThingsFromServer();
+    setGoodThings(goodThings);
+  } catch(error){
+    alert("Not able to laod data from server");
+    const loadingErrorGoodThings = {
+      link: "none"
+    }
+  }
+}
 
 return (
     <div className="flex flex-col justify-center bg-white max-w-[360px]">
