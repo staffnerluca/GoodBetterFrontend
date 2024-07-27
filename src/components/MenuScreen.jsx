@@ -28,10 +28,10 @@ export default function MenuScreen() {
 
       }
       const loadingErroUser = {
-        doing_good_score: "not able to load",
-        doing_good_streak: "not able to load",
-        wants_to_become_vegetarian: "not able to load",
-        not_eating_meat_streak: "not able to load"
+        doing_good_score: 100, //"not able to load",
+        doing_good_streak: 0, // "not able to load",
+        wants_to_become_vegetarian: true,//"not able to load",
+        not_eating_meat_streak: 0 //"not able to load"
       }
       setUserState(loadingErroUser);
       console.log("The user: " + userState);
@@ -104,23 +104,22 @@ export default function MenuScreen() {
     }
   }
 
-  React.useEffect(() => {
-    console.log("The user:", userState);
-  }, [userState]);
-
-  React.useEffect(() => {
-    console.log("Good things:", goodThings);
-    console.log(loading);
-  }, [goodThings]);
-
   function TopMenu(){
+    console.log("Die Punkte: " + userState["doing_good_score"]);
+    let vegetarian_menu = null;
+    if(userState["wants_to_become_vegetarian"]){
+      vegetarian_menu = <div>{userState["not_eating_meat_streak"]}</div>
+    }
     return(
       <div className="flex gap-5 justify-between items-center self-stretch w-full text-xl">
         <div className="self-stretch my-auto text-6xl text-center text-red-600">
           ❤️
         </div>
+        <div>
+          {userState["doing_good_streak"]}
+        </div>
         <div className="flex gap-1 self-stretch my-auto text-black">
-          <div className="grow my-auto">{userState["points"]} </div>
+          <div className="grow my-auto">{userState["doing_good_score"]} </div>
           <img
             loading="lazy"
             srcSet="..."
@@ -133,7 +132,7 @@ export default function MenuScreen() {
             srcSet="..."
             className="object-cover absolute inset-0 size-full"
           />
-          12
+          {vegetarian_menu}
         </div>
       </div>
     )
@@ -147,11 +146,7 @@ export default function MenuScreen() {
 
   function GoodThingBox({type}){
     if(!loading){
-      console.log("The user: " + JSON.stringify(userState));
-      console.log("The good things: " + JSON.stringify(goodThings));
-      console.log("The name: " + JSON.stringify(goodThings[type]));
       const currentGoodThing = goodThings[type];
-      console.log("the current stuff: " + currentGoodThing)
       const goodThingName = currentGoodThing["name"];
       const goodThingContent = currentGoodThing["content"];
       const goodThingImageLink = currentGoodThing["image_link"];
@@ -218,7 +213,9 @@ export default function MenuScreen() {
       <div>
         <TopMenu />
         <DailyQuote />
+        <GoodThingBox type="donate" /> 
         <GoodThingBox type="course" />
+        <GoodThingBox type="other" />
         <FooterMenu />
       </div>
     );
