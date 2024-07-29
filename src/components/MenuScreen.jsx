@@ -1,5 +1,6 @@
-import * as React from "react";
+import * as React from "react"
 import { useState } from "react";
+import "./../index.css";
 
 
 export default function MenuScreen() {
@@ -81,30 +82,37 @@ export default function MenuScreen() {
     return getDataFromServer("getGoodThings");
   }
 
-  async function getDataFromServer(address){
-    try{
-      const username = JSON.parse(localStorage.getItem("username"));
-      const response = await fetch("127.0.0.1/"+address, {
+  async function testServer() {
+    let tester = await getDataFromServer("get_current_course_lesson/");
+    console.log("the Tester: " + JSON.stringify(tester));
+  }
+  
+  async function getDataFromServer(address) {
+    try {
+      const username = "max@mustermann.com";//JSON.parse(localStorage.getItem("username"));
+      if (!username) {
+        throw new Error("Username not found in local storage");
+      }
+      const response = await fetch("http://127.0.0.1:8000/api/" + address, {
+        method: "GET",
         headers: {
-          method: "GET",
           Accept: "application/json",
         },
-        body: {
-          user_name: username,
-        }
       });
-      if(!response.ok){
+      if (!response.ok) {
         alert("The response was not ok");
         throw new Error("HTTP error! Status was not ok");
       }
       const user = await response.json();
       return user;
-    } catch(error){
-      //alert("Can't load user");
+    } 
+    catch (error) {
+        return null;
     }
   }
 
   function TopMenu(){
+    testServer()
     console.log("Die Punkte: " + userState["doing_good_score"]);
     let vegetarian_menu = null;
     if(userState["wants_to_become_vegetarian"]){
