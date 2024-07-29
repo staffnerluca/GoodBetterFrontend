@@ -71,3 +71,8 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.good_thing_box {
+    background-color: #E5E4E2;
+    min-height: 30%;
+}
