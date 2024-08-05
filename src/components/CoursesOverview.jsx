@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './../App.css';
 
-function StarterSurvey() {
+function CoursesOverview() {
   const [userAttributes, setUserAttributes] = useState(0);
 
   function aboutYouForm() {
@@ -15,4 +15,4 @@ function StarterSurvey() {
   );
 }
 
-export default StarterSurvey;
+export default CoursesOverview;
