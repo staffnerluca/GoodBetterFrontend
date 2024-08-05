@@ -4,6 +4,38 @@ import './../App.css';
 function VegitarianismStreak() {
   const [currentStreak, setCurrentStreak] = useState(0);
   const [streakCalendar, setStreakCalendar] = useState(0);
+  const [numOfMeatFreeDays, setNumOfMeatFreeDays] = useState(1)
+  const [meatFreeDays, setMeatFreeDays] = useState({
+    Mo: 0,
+    Tu: 0,
+    We: 0,
+    Th: 0,
+    Fr: 0,
+    Sa: 0,
+    Su: 0
+  })
+
+  function meatEatingDaysChanged(checkbox, day){
+    let tmp = meatFreeDays;
+    if(checkbox.target.checked){
+      tmp[day] = 1;
+    }
+    else{
+      tmp[day] = 0;
+    }
+    const sum = Object.values(tmp).reduce((accumulator, currentValue) => {
+      return accumulator + currentValue;
+    }, 0);
+    if(sum > numOfMeatFreeDays){
+      alert("Too many days chosen!")
+      checkbox.target.checked = false;
+    }
+  }
+
+  function numOfEatingMeatDaysChanged(event){
+    setNumOfMeatFreeDays(event.target.value);
+    event
+  }
 
   function Top(){
     return(
@@ -11,7 +43,7 @@ function VegitarianismStreak() {
         <div className='streakNumber'>
           <image src='images/vegitarianStreakIcon.jpg'>{currentStreak}</image>
         </div>
-        Number of eating meat days: <select>
+        Number of eating meat days: <select value={numOfMeatFreeDays} onChange={numOfEatingMeatDaysChanged}>
           <option>1</option>
           <option>2</option>
           <option>3</option>
@@ -20,7 +52,13 @@ function VegitarianismStreak() {
           <option>6</option>
         </select>
         <br></br>
-        <input type="checkbox" onChange={meatEatingDaysChanged}></input>
+        Mo:<input type="checkbox" onChange={(e) => meatEatingDaysChanged(e, "Mo")}></input> 
+        Tu:<input type="checkbox" onChange={(e) => meatEatingDaysChanged(e, "Tu")}></input>
+        We:<input type="checkbox" onChange={(e) => meatEatingDaysChanged(e, "We")}></input>
+        Th:<input type="checkbox" onChange={(e) => meatEatingDaysChanged(e, "Th")}></input>
+        Fr:<input type="checkbox" onChange={(e) => meatEatingDaysChanged(e, "Fr")}></input>
+        Sa:<input type="checkbox" onChange={(e) => meatEatingDaysChanged(e, "Sa")}></input>
+        Su:<input type="checkbox" onChange={(e) => meatEatingDaysChanged(e, "Su")}></input>
       </div>
     )
   }
@@ -42,16 +80,26 @@ function VegitarianismStreak() {
   }
 
   function Calendar(){
-
+    return(
+      <div className='calendar'>
+        2024
+      </div>
+    )
   }
 
   function getCalendarFromServer(){
 
   }
 
+  function saveChangesInMeatEatingSettings(){
+    
+  }
+
   return (
     <div>
       <Top></Top>
+      <Calendar></Calendar>
+      <button onClick={saveChangesInMeatEatingSettings}>Save</button>
     </div>
   );
 }
