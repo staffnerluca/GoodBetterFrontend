@@ -16,7 +16,6 @@ function VegitarianismStreak() {
     Sa: 0,
     Su: 0
   })
-  const [test, setTest] = useState(0);
 
   useEffect(() => {
     const getData = async() => {
@@ -85,28 +84,37 @@ function VegitarianismStreak() {
     )
   }
 
-  function CalendarDay(date, wasVegetarian, freeDay) {
-    let symbol = "images/freeDay.jpg";
-    if(wasVegetarian){
-      symbol = "images/vegetarian.jpg";
+  function CalendarDay({date, status}) {
+    let symbol = "❓";
+    if(status === "v"){
+      symbol = "🐣";
     }
-    else if(!freeDay){
-      symbol = ""
+    else if(status !== "f"){
+      symbol = "😞";
+    }
+    else{
+      symbol = "🏖️"
     }
     return(
       <div className='calendarDay'>
         {date}
-        
+        {symbol}
       </div>
     )
   }
 
   function Calendar(){
-    //const cal = await getCalendarFromServer();
-    //alert(cal);
+    let calendar = []
+    let count = 0;
+    for (let day in vegStreakCalendar){
+      calendar.push(<CalendarDay key={count} date={day} status={vegStreakCalendar[day]} />);
+      count++;
+    }
+    
     return(
       <div className='calendar'>
         2024
+        {calendar}
       </div>
     )
   }
