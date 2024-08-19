@@ -33,7 +33,7 @@ function Register() {
         };
 
         try {
-            const response = await fetch("http://127.0.0.1/api/register/", {
+            const response = await fetch("http://127.0.0.1:8000/api/register/", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -105,17 +105,17 @@ function Register() {
                 <input
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
-                /> <br />
+                /> <br /> <br />
                 Second Name:
                 <input
                     value={secondName}
                     onChange={(e) => setSecondName(e.target.value)}
-                /> <br />
+                /> <br /> <br />
                 Country:
                 <input
                     value={country}
                     onChange={(e) => setCountry(e.target.value)}
-                /> <br />
+                /> <br /> <br />
                 Birth date:
                 <input
                     value={birthDate}
