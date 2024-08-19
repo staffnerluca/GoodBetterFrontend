@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 
 function Register() {
-    // States for BasicRegisterForm
     const [currentPage, setCurrentPage] = useState("br");
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
@@ -9,13 +8,11 @@ function Register() {
     const [password2, setPassword2] = useState("");
     const [wantsToBecomeVegetarian, setWantsToBecomeVegetarian] = useState(false);
 
-    // States for OptionalInformation
     const [firstName, setFirstName] = useState("");
     const [secondName, setSecondName] = useState("");
     const [country, setCountry] = useState("");
     const [birthDate, setBirthDate] = useState("");
 
-    // Handle the submission of both forms
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -56,53 +53,83 @@ function Register() {
         }
     };
 
-    function BasicRegisterForm() {
-        return (
-            <div>
-                <h1>Start your journey to do good now!</h1> <br />
-                <form onSubmit={(e) => { e.preventDefault(); setCurrentPage("oi"); }}>
-                    E-Mail: <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" required /> <br /><br />
-                    Username: <input value={username} onChange={(e) => setUsername(e.target.value)} required /> <br /><br />
-                    Password: <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" required /> <br /><br />
-                    The password for the second time: <input value={password2} onChange={(e) => setPassword2(e.target.value)} type="password" required /> <br /><br />
-                    Do you want to become vegetarian? <input 
-                        name="wants_to_become_vegetarian" 
-                        type="checkbox" 
-                        checked={wantsToBecomeVegetarian} 
-                        onChange={(e) => setWantsToBecomeVegetarian(e.target.checked)} 
-                    /> <br /><br />
-                    <button type="submit">Next</button>
-                </form>
-            </div>
-        );
-    }
+    //useMemo: prevents the component to re render after every input field change
+    const BasicRegisterForm = useMemo(() => (
+        <div>
+            <h1>Start your journey to do good now!</h1> <br />
+            <form onSubmit={(e) => { e.preventDefault(); setCurrentPage("oi"); }}>
+                E-Mail:
+                <input
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    type="email"
+                    required
+                /> <br /><br />
+                Username:
+                <input
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    required
+                /> <br /><br />
+                Password:
+                <input
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    type="password"
+                    required
+                /> <br /><br />
+                The password for the second time:
+                <input
+                    value={password2}
+                    onChange={(e) => setPassword2(e.target.value)}
+                    type="password"
+                    required
+                /> <br /><br />
+                Do you want to become vegetarian?
+                <input
+                    name="wants_to_become_vegetarian"
+                    type="checkbox"
+                    checked={wantsToBecomeVegetarian}
+                    onChange={(e) => setWantsToBecomeVegetarian(e.target.checked)}
+                /> <br /><br />
+                <button type="submit">Next</button>
+            </form>
+        </div>
+    ), [email, username, password, password2, wantsToBecomeVegetarian]);
 
-    function OptionalInformation() {
-        return (
-            <div>
-                <form onSubmit={handleSubmit}>
-                    <h3>These fields are optional but we would love to get more information about you!</h3>
-                    First Name: <input value={firstName} onChange={(e) => setFirstName(e.target.value)} /> <br />
-                    Second Name: <input value={secondName} onChange={(e) => setSecondName(e.target.value)} /> <br />
-                    Country: <input value={country} onChange={(e) => setCountry(e.target.value)} /> <br />
-                    Birth date: <input value={birthDate} onChange={(e) => setBirthDate(e.target.value)} type="date" /> <br /><br />
-                    <button type="submit">Register</button>
-                </form>
-            </div>
-        );
-    }
-
-    function RenderCurrentPage() {
-        if (currentPage === "br") {
-            return <BasicRegisterForm />;
-        } else if (currentPage === "oi") {
-            return <OptionalInformation />;
-        }
-    }
+    const OptionalInformation = useMemo(() => (
+        <div>
+            <form onSubmit={handleSubmit}>
+                <h3>These fields are optional but we would love to get more information about you!</h3>
+                First Name:
+                <input
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                /> <br />
+                Second Name:
+                <input
+                    value={secondName}
+                    onChange={(e) => setSecondName(e.target.value)}
+                /> <br />
+                Country:
+                <input
+                    value={country}
+                    onChange={(e) => setCountry(e.target.value)}
+                /> <br />
+                Birth date:
+                <input
+                    value={birthDate}
+                    onChange={(e) => setBirthDate(e.target.value)}
+                    type="date"
+                /> <br /><br />
+                <button type="submit">Register</button>
+            </form>
+        </div>
+    ), [firstName, secondName, country, birthDate]);
 
     return (
         <div>
-            <RenderCurrentPage />
+            {currentPage === "br" ? BasicRegisterForm : OptionalInformation}
         </div>
     );
 }
