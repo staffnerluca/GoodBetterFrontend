@@ -4,6 +4,7 @@ import VegetarianismStreak from './components/VegitarianismStreak';
 import CoursesOverview from './components/CoursesOverview';
 import DidYouEatMeatToday from './components/DidYouEatMeatToday';
 import TestAPI from './components/TestAPI';
+import Register from './components/Register';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/start" Component={CoursesOverview} />
           <Route path="/didYouEatMeat" Component={DidYouEatMeatToday} />
           <Route path="/testAPI" Component={TestAPI} />
+          <Route path="/register" Component={Register} />
         </Routes>
       </div>
     </Router>

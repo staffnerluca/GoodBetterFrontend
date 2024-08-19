@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const API_BASE_URL = 'http://127.0.0.1/api';
+const API_BASE_URL = 'http://127.0.0.1:8000/api';
 
 const TestAPI = () => {
   const [token, setToken] = useState(null);
@@ -34,12 +34,12 @@ const TestAPI = () => {
     const testAPIs = async () => {
       const endpoints = [
         { url: '/get_current_course_lesson/', method: 'GET' },
-        { url: '/register/', method: 'POST', data: { email: 'new@example.com', password: 'password', username: 'newuser' } },
+        { url: '/register/', method: 'POST', data: { email: 'new2@example.com', password: 'password', username: 'newuser' } },
         { url: '/create_user_profile/', method: 'POST', data: { first_name: 'John', second_name: 'Doe', username: 'johndoe', country: 'US', birth_date: '1990-01-01', wants_to_become_vegetarian: true } },
-        { url: '/get_data_for_vegetarian_streak_page/?username=johndoe', method: 'GET' },
+        { url: '/get_data_for_vegetarian_streak_page/?username=username1', method: 'GET' },
         { url: '/create_test_users/', method: 'POST' },
-        { url: '/create_test_days/', method: 'POST' },
-        { url: '/get_all_users/', method: 'GET' },
+        { url: '/get_all_users/', 
+            method: 'GET' },
         { url: '/get_all_days/', method: 'GET' },
       ];
 
@@ -75,7 +75,7 @@ const TestAPI = () => {
     };
 
     const executeTests = async () => {
-      await login();
+      //await login();
       await testAPIs();
     };
 
