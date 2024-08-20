@@ -7,16 +7,15 @@ function Login() {
     const navigate = useNavigate();
 
     async function handleSubmit(e) {
-        e.preventDefault(); // Prevent the default form submission
+        e.preventDefault();
 
-        // Create the data object to send to the API
         const loginData = {
             email: mail,
             password: password,
         };
 
         try {
-            const response = await fetch("http://127.0.0.1/api/login", {
+            const response = await fetch("http://127.0.0.1/api/login/", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -28,6 +27,8 @@ function Login() {
                 const responseData = await response.json();
                 alert("Login successful!");
                 console.log("Response Data:", responseData);
+                localStorage.setItem('mail', mail);
+                localStorage.setItem('username', responseData.username);
             } else {
                 const errorData = await response.json();
                 alert(`Login failed: ${errorData.error}`);

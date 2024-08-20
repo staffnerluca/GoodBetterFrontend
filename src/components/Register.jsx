@@ -51,9 +51,10 @@ function Register() {
             console.error("Error during registration:", error);
             alert("An error occurred. Please try again later.");
         }
+        localStorage.setItem("mail", email);
+        localStorage.setItem("username", username);
     };
 
-    //useMemo: prevents the component to re render after every input field change
     const BasicRegisterForm = useMemo(() => (
         <div>
             <h1>Start your journey to do good now!</h1> <br />
