@@ -1,18 +1,11 @@
-import { useState } from 'react';
-import './../App.css';
+import React from "react"
 
-function CoursesOverview() {
-  const [userAttributes, setUserAttributes] = useState(0);
-
-  function aboutYouForm() {
-    console.log("hello");
-  }
-
-  return (
-    <div>
-      <h1>Hello World</h1>
-    </div>
-  );
+function CoursesOverview(){
+    return(
+        <div>
+            <h1>Hello World</h1>
+        </div>
+    )
 }
 
 export default CoursesOverview;
