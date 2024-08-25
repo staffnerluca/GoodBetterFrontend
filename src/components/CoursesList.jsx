@@ -7,9 +7,10 @@ function CourseList() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/courses") //i'm testing this with a dummy backend server that runs locally, pls change this to the proper url :)
+      .get("http://127.0.0.1:8000/api/get_all_courses/")
       .then((response) => {
         setCourses(response.data);
+        alert(JSON.stringify(response.data));
       })
       .catch((error) => {
         console.error("Error fetching courses!", error);
@@ -17,16 +18,20 @@ function CourseList() {
   }, []);
 
   return (
-    <div className="course-list">
-      {courses.map((course) => (
-        <CourseCard
-          key={course.id}
-          id={course.id}
-          title={course.title}
-          pictureUrl={course.pictureUrl}
-        />
-      ))}
+    <div>
+      <h1>Our courses</h1>
+      <div className="course-list">
+        {courses.map((course) => (
+          <CourseCard
+            key={course.id}
+            id={course.id}
+            title={course.name}
+            pictureUrl={course.imageUrl}
+          />
+        ))}
+      </div>
     </div>
+    
   );
 }
 

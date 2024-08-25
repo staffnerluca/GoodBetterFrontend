@@ -35,7 +35,10 @@ function Login() {
             }
         } catch (error) {
             console.error("Error during login:", error);
-            alert("An error occurred. Please try again later.");
+            // ############ change later, only for demonstration purposes ###########
+            localStorage.setItem("username", "username1");
+            navigate("/start");
+            //alert("An error occurred. Please try again later.");
         }
     }
 
