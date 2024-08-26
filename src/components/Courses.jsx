@@ -6,7 +6,7 @@ function Course(){
     const [questionsDict, setQuestionsDict] = useState({});
     const [showTitleScreen, setShowTitleScreen] = useState(true);
     const [doneQuestions, setDoneQuestions] = useState([])
-
+    
     useEffect(() => {
         async function fetchQuestions() {
             try {
@@ -27,9 +27,8 @@ function Course(){
                     acc[id] = data[id];
                     return acc;
                 }, {});
-
+                
                 setQuestionsDict(restQuestions);
-                console.log(questionsDict);
             } catch (error) {
                 console.error('Error fetching questions:', error);
             }

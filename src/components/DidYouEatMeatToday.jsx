@@ -24,7 +24,8 @@ function DidYouEatMeatToday() {
   async function storeDidUserEatMeat(result){
     try {
       const url = 'http://127.0.0.1/api/postDidUserEatMeat';
-      const body = JSON.stringify({ didUserEatMeat: result });
+      const user = localStorage.getItem("username")
+      const body = JSON.stringify({ username: user, didUserEatMeat: result });
   
       const response = await fetch(url, {
         method: 'POST',
@@ -47,7 +48,11 @@ function DidYouEatMeatToday() {
 
   async function getIsFreeDay(){
     try{
-      const response = await fetch("http://127.0.0.1/api/isFreeDay");
+      let username = localStorage.getItem("unsername");
+      if(username === null){
+        username = "username1"
+      }
+      const response = await fetch("http://127.0.0.1:8000/api/is_free_day/?username=" + username);
       const data = await response.json();
       return data.result === "f";
     } catch(error){
