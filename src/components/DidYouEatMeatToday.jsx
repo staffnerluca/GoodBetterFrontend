@@ -23,9 +23,9 @@ function DidYouEatMeatToday() {
 
   async function storeDidUserEatMeat(result){
     try {
-      const url = 'http://127.0.0.1/api/postDidUserEatMeat';
+      const url = 'http://127.0.0.1:8000/api/post_did_user_eat_meat';
       const user = localStorage.getItem("username")
-      const body = JSON.stringify({ username: user, didUserEatMeat: result });
+      const body = JSON.stringify({ username: user, vegetarian_status: result });
   
       const response = await fetch(url, {
         method: 'POST',
