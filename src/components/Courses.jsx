@@ -50,17 +50,19 @@ function Course() {
         setDoneQuestions([...doneQuestions, currentQuestion["id"]]);
         let question = "Course finished";
         if (type === "yes") {
-            question = questionsDict["next_question_if_true"];
+            question = questionsDict[currentQuestion["next_question_if_true"]];
         } else if (type === "no") {
-            question = questionsDict["next_question_if_false"];
+            question = questionsDict[currentQuestion["next_question_if_false"]];
         } else {
             alert("Not able to handle button press");
         }
-        console.log(question);
+        console.log("The next question: "+question);
         setCurrentQuestion(question);
     }
 
     function CourseQuestion() {
+        console.log(currentQuestion);
+        console.log(questionsDict)
         if (currentQuestion["is_boolean"]) {
             return (
                 <div>
@@ -84,7 +86,7 @@ function Course() {
                 </div>
             );
         } else {
-            return null; // Add a fallback if no condition matches
+            return null;
         }
     }
 

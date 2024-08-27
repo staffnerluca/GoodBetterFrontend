@@ -22,7 +22,6 @@ function App() {
           <Route path="" Component={Login} />
           <Route path="/courses" Component={Courses} />
           <Route path="/start" Component={CoursesList} />
-          <Route path="/courses" element={Courses} />
         </Routes>
       </div>
     </Router>
