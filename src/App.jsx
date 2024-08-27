@@ -9,13 +9,14 @@ import Login from "./components/Login";
 import Courses from "./components/Courses";
 import CoursesList from "./components/CoursesList";
 import CoursePage from "./components/CoursePage";
+import Footer from "./components/Footer";
 
 function App() {
   return (
     <Router>
       <div>
         <Routes>
-          <Route path="/vegitarianismStreak" Component={VegetarianismStreak}/>
+          <Route path="/vegitarianismStreak" Component={VegetarianismStreak} />
           <Route path="/didYouEatMeat" Component={DidYouEatMeatToday} />
           <Route path="/testAPI" Component={TestAPI} />
           <Route path="/register" Component={Register} />
@@ -23,6 +24,7 @@ function App() {
           <Route path="/courses" Component={Courses} />
           <Route path="/start" Component={CoursesList} />
         </Routes>
+        <Footer />
       </div>
     </Router>
   );

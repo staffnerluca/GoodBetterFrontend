@@ -1,0 +1,30 @@
+footer {
+  padding: 20px;
+  position: fixed;
+  width: 80%;
+  bottom: 0;
+  display: flex;
+  justify-content: center; /* Center the buttons horizontally */
+  align-items: center;     /* Center the buttons vertically */
+  text-align: center;      /* Center text within the footer */
+}
+
+.footer-buttons {
+  display: flex;
+  justify-content: center; /* Ensure buttons are centered within this div */
+  gap: 20px; /* Space between buttons */
+}
+
+  
+  footer button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+  }
+  
+  footer button:hover {
+    background-color: #0056b3;
+  }
+  
