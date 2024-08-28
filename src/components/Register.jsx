@@ -59,40 +59,56 @@ function Register() {
         <div>
             <h1>Start your journey to do good now!</h1> <br />
             <form onSubmit={(e) => { e.preventDefault(); setCurrentPage("oi"); }}>
-                E-Mail:
-                <input
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    type="email"
-                    required
-                /> <br /><br />
-                Username:
-                <input
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    required
-                /> <br /><br />
-                Password:
-                <input
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    type="password"
-                    required
-                /> <br /><br />
-                The password for the second time:
-                <input
-                    value={password2}
-                    onChange={(e) => setPassword2(e.target.value)}
-                    type="password"
-                    required
-                /> <br /><br />
-                Do you want to become vegetarian?
-                <input
-                    name="wants_to_become_vegetarian"
-                    type="checkbox"
-                    checked={wantsToBecomeVegetarian}
-                    onChange={(e) => setWantsToBecomeVegetarian(e.target.checked)}
-                /> <br /><br />
+                <div className="form-group">
+                    <label htmlFor="email">E-Mail:</label>
+                    <input
+                        id="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        type="email"
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="username">Username:</label>
+                    <input
+                        id="username"
+                        type="text"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="password">Password:</label>
+                    <input
+                        id="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        type="password"
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="password2">Password (again ):</label>
+                    <input
+                        id="password2"
+                        value={password2}
+                        onChange={(e) => setPassword2(e.target.value)}
+                        type="password"
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="wants_to_become_vegetarian">Do you want to become vegetarian?</label>
+                    <input
+                        id="wants_to_become_vegetarian"
+                        name="wants_to_become_vegetarian"
+                        type="checkbox"
+                        checked={wantsToBecomeVegetarian}
+                        onChange={(e) => setWantsToBecomeVegetarian(e.target.checked)}
+                    />
+                </div>
                 <button type="submit">Next</button>
             </form>
         </div>
@@ -102,27 +118,39 @@ function Register() {
         <div>
             <form onSubmit={handleSubmit}>
                 <h3>These fields are optional but we would love to get more information about you!</h3>
-                First Name:
-                <input
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                /> <br /> <br />
-                Second Name:
-                <input
-                    value={secondName}
-                    onChange={(e) => setSecondName(e.target.value)}
-                /> <br /> <br />
-                Country:
-                <input
-                    value={country}
-                    onChange={(e) => setCountry(e.target.value)}
-                /> <br /> <br />
-                Birth date:
-                <input
-                    value={birthDate}
-                    onChange={(e) => setBirthDate(e.target.value)}
-                    type="date"
-                /> <br /><br />
+                <div className="form-group">
+                    <label htmlFor="firstName">First Name:</label>
+                    <input
+                        id="firstName"
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                    />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="secondName">Second Name:</label>
+                    <input
+                        id="secondName"
+                        value={secondName}
+                        onChange={(e) => setSecondName(e.target.value)}
+                    />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="country">Country:</label>
+                    <input
+                        id="country"
+                        value={country}
+                        onChange={(e) => setCountry(e.target.value)}
+                    />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="birthDate">Birth date:</label>
+                    <input
+                        id="birthDate"
+                        value={birthDate}
+                        onChange={(e) => setBirthDate(e.target.value)}
+                        type="date"
+                    />
+                </div>
                 <button type="submit">Register</button>
             </form>
         </div>

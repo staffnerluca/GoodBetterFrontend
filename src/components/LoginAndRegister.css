@@ -1,0 +1,50 @@
+/* Center the form on the page */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the form elements horizontally */
+    justify-content: center;
+    margin: 0 auto;
+    width: 100%; /* Optional: To allow more responsive design */
+    max-width: 600px; /* Optional: Limit the maximum width of the form */
+}
+
+/* Form group styling */
+.form-group {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+/* Label styling */
+.form-group label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Input styling */
+.form-group input[type="email"],
+.form-group input[type="text"],
+.form-group input[type="password"],
+.form-group input[type="date"] {
+    width: 100%;        /* Make the inputs take up the full width of their container */
+    max-width: 400px;   /* Maximum width of the input fields */
+    height: 30px;       /* Reduce the height of the input fields */
+    padding: 8px;       /* Adjust padding to make input less high */
+    font-size: 16px;    /* Adjust font size for readability */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Ensure padding is included in the width/height */
+}
+
+/* Checkbox styling */
+.form-group input[type="checkbox"] {
+    width: auto;
+}
+
+/* Button styling */
+button {
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}

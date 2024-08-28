@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./LoginAndRegister.css";
 
 function Login() {
     const [mail, setMail] = useState("");
@@ -64,6 +65,7 @@ function Login() {
                 <div>
                     <label>Password:</label>
                     <input 
+                        id="passworrd"
                         type="password" 
                         value={password} 
                         onChange={(e) => setPassword(e.target.value)} 
