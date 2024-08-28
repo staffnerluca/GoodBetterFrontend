@@ -1,0 +1,16 @@
+.course-card {
+    text-align: center; 
+  }
+  
+  .course-card img {
+    width: 320px;
+    height: 180px;
+    object-fit: cover; 
+    display: block; 
+    margin: 0 auto; 
+  }
+  
+  .course-card h3 {
+    margin: 0;
+  }
+  

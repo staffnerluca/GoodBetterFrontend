@@ -22,12 +22,15 @@ function CourseList() {
       <h1>Our courses</h1>
       <div className="course-list">
         {courses.map((course) => (
+          <div>
           <CourseCard
             key={course.id}
             id={course.id}
             title={course.name}
             pictureUrl={course.imageUrl}
           />
+          <br></br>
+          </div>
         ))}
       </div>
     </div>

@@ -8,7 +8,7 @@ function CoursePage() {
 
   useEffect(() => {
     axios
-      .get(`https://localhost:4000/courses/${id}`) //need to change!
+      .get(`http://127.0.0.1:8000/api/get_course/1/`)
       .then((response) => {
         setCourse(response.data);
       })
@@ -22,7 +22,7 @@ function CoursePage() {
   return (
     <div className="course-page">
       <h1>{course.title}</h1>
-      <img src={course.pictureUrl} alt={course.title} />
+      <img src={course.imageUrl} alt={course.title} />
     </div>
   );
 }
