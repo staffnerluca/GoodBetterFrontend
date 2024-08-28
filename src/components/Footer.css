@@ -3,7 +3,7 @@ footer {
   justify-content: center;  /* Center horizontally */
   align-items: center;      /* Center vertically */
   height: 100px;            /* Adjust this value as needed */
-  background-color: #f8f9fa; /* Optional: Add background color */
+  /*background-color: #f8f9fa;*/
 }
 
 .footer-buttons {
