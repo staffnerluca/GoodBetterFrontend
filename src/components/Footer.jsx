@@ -6,6 +6,9 @@ function Footer() {
   return (
     <footer>
       <div className="footer-buttons">
+        <Link to="/courses">
+          <button>Courses</button>
+        </Link>
         <Link to="/vegitarianismStreak">
           <button>Vegitarianism Streak</button>
         </Link>

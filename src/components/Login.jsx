@@ -35,8 +35,13 @@ function Login() {
             }
         } catch (error) {
             console.error("Error during login:", error);
-            // ############ change later, only for demonstration purposes ###########
-            localStorage.setItem("username", "username1");
+            let mail = document.getElementById("email").value;
+            const askForUsername = await fetch("http://127.0.0.1:8000/api/get_username_from_mail/?mail="+mail);
+            if(askForUsername.ok){
+                const usernameJson = await askForUsername.json();
+                const username = usernameJson["username"];
+                localStorage.setItem("username", username);
+            }
             navigate("/start");
             //alert("An error occurred. Please try again later.");
         }
@@ -49,6 +54,7 @@ function Login() {
                 <div>
                     <label>Email:</label>
                     <input 
+                        id="email"
                         type="email" 
                         value={mail} 
                         onChange={(e) => setMail(e.target.value)} 
