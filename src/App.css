@@ -48,3 +48,13 @@
 .calendar{
   background-color: lightgray;
 }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+main {
+  min-height: calc(100vh - 120px);
+  padding: 1rem;
+}
