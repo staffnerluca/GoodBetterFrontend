@@ -6,6 +6,7 @@ function Course() {
     const [questionsDict, setQuestionsDict] = useState({});
     const [showTitleScreen, setShowTitleScreen] = useState(true);
     const [doneQuestions, setDoneQuestions] = useState([]);
+    const [courseTitle, setCourseTitle] = useState("Loading");
 
     useEffect(() => {
         async function fetchQuestions() {
@@ -34,13 +35,27 @@ function Course() {
             }
         }
 
+        async function fetchCourse(){
+            try{
+                const response = await fetch('http://127.0.0.1:8000/api/get_course/1/');
+                const data = await response.json();
+                const tmpTitle = data["name"];
+                setCourseTitle(tmpTitle);
+            }
+            catch(error){
+                console.error('Error fetching courses: ', error);
+            }
+        }
+
+        fetchCourse();
         fetchQuestions();
     }, [course_id]);
 
     function TitleScreen() {
+        // change to fetch title of course
         return (
             <div>
-                <h1>This is the title screen</h1>
+                <h1>{courseTitle}</h1>
                 <button onClick={() => setShowTitleScreen(false)}>Start</button>
             </div>
         );
