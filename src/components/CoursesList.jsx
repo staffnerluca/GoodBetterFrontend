@@ -10,7 +10,6 @@ function CourseList() {
       .get("http://127.0.0.1:8000/api/get_all_courses/")
       .then((response) => {
         setCourses(response.data);
-        alert(JSON.stringify(response.data));
       })
       .catch((error) => {
         console.error("Error fetching courses!", error);

@@ -5,7 +5,7 @@ import "./CourseCard.css"
 function CourseCard({ id, title, pictureUrl }) {
   return (
     <div className="course-card">
-      <Link to={`/courses/${id}`}>
+      <Link to={`/courses/`}>
         <img
             src={pictureUrl}
             alt={"Image: " + title}
