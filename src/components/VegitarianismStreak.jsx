@@ -6,7 +6,7 @@ function VegitarianismStreak() {
   const [username, setUsername] = useState("username1");
   const { currentVegStreak, setCurrentVegStreak } = useVegStreak();
 
-  const [vegStreakCalendar, setVegStreakCalendar] = useState(0);
+  const [vegStreakCalendar, setVegStreakCalendar] = useState([]);
   const [numOfMeatFreeDays, setNumOfMeatFreeDays] = useState(1);
   const [loading, setLoading] = useState(true);
   const [meatDays, setMeatDays] = useState({
@@ -23,13 +23,16 @@ function VegitarianismStreak() {
     const getData = async () => {
       try {
         const data = await getDataFromServer();
-        setVegStreakCalendar(data["calendar"]);
+        const cal = data["calendar"];
+        const dates = cal.map(entry => ({ date: entry.date, status: entry.vegetarian_status }));
+
+        setVegStreakCalendar(dates);
         setMeatDays(data["meat_days"]);
         setCurrentVegStreak(data["not_eating_meat_streak"]);
       } catch (e) {
         alert(
           "Error fetching data" + e.toString(),
-          ". Using default data (only for test purposes"
+          ". Using default data (only for test purposes)"
         );
       } finally {
         setLoading(false);
@@ -39,7 +42,7 @@ function VegitarianismStreak() {
   }, []);
 
   function meatEatingDaysChanged(checkbox, day) {
-    let tmp = meatFreeDays;
+    let tmp = meatDays;
     if (checkbox.target.checked) {
       tmp[day] = 1;
     } else {
@@ -48,7 +51,7 @@ function VegitarianismStreak() {
     const sum = Object.values(tmp).reduce((accumulator, currentValue) => {
       return accumulator + currentValue;
     }, 0);
-    if (sum > numOfMeatFreeDays) {
+    if (sum > numOfMeatFreeDays + 1) {
       alert("Too many days chosen!");
       checkbox.target.checked = false;
     }
@@ -56,16 +59,11 @@ function VegitarianismStreak() {
 
   function numOfEatingMeatDaysChanged(event) {
     setNumOfMeatFreeDays(event.target.value);
-    event;
   }
 
   function Top() {
     return (
       <div className="top">
-        <div className="streakNumber">
-          <img src="images/vegitarianStreakIcon.jpg"></img>
-        </div>
-        <div>{currentVegStreak}</div>
         Number of eating meat days:{" "}
         <select value={numOfMeatFreeDays} onChange={numOfEatingMeatDaysChanged}>
           <option>1</option>
@@ -76,41 +74,15 @@ function VegitarianismStreak() {
           <option>6</option>
         </select>
         <br></br>
-        Mo:
-        <input
-          type="checkbox"
-          onChange={(e) => meatEatingDaysChanged(e, "Mo")}
-        ></input>
-        Tu:
-        <input
-          type="checkbox"
-          onChange={(e) => meatEatingDaysChanged(e, "Tu")}
-        ></input>
-        We:
-        <input
-          type="checkbox"
-          onChange={(e) => meatEatingDaysChanged(e, "We")}
-        ></input>
-        Th:
-        <input
-          type="checkbox"
-          onChange={(e) => meatEatingDaysChanged(e, "Th")}
-        ></input>
-        Fr:
-        <input
-          type="checkbox"
-          onChange={(e) => meatEatingDaysChanged(e, "Fr")}
-        ></input>
-        Sa:
-        <input
-          type="checkbox"
-          onChange={(e) => meatEatingDaysChanged(e, "Sa")}
-        ></input>
-        Su:
-        <input
-          type="checkbox"
-          onChange={(e) => meatEatingDaysChanged(e, "Su")}
-        ></input>
+        {["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"].map((day, index) => (
+          <label key={index}>
+            {day}:
+            <input
+              type="checkbox"
+              onChange={(e) => meatEatingDaysChanged(e, day)}
+            />
+          </label>
+        ))}
       </div>
     );
   }
@@ -119,46 +91,36 @@ function VegitarianismStreak() {
     let symbol = "❓";
     if (status === "v") {
       symbol = "🐣";
-    } else if (status !== "f") {
+    } else if (status === "m") {
       symbol = "😞";
-    } else {
+    } else if (status === "f") {
       symbol = "🏖️";
     }
     return (
       <div className="calendarDay">
-        {date}
-        {symbol}
+        {date} {symbol}
       </div>
     );
   }
 
   function Calendar() {
-    let calendar = [];
-    let count = 0;
-    for (let day in vegStreakCalendar) {
-      calendar.push(
-        <CalendarDay key={count} date={day} status={vegStreakCalendar[day]} />
-      );
-      count++;
-    }
-
     return (
       <div className="calendar">
-        2024
-        {calendar}
+        <h2>2024 Vegetarianism Streak Calendar</h2>
+        {vegStreakCalendar.map((entry, index) => (
+          <CalendarDay key={index} date={entry.date} status={entry.status} />
+        ))}
       </div>
     );
   }
 
   async function getDataFromServer() {
     try {
-      const user = "?username=" + username;
+      const user = username;
 
-      const response = await fetch(
-        "http://127.0.0.1:8000/api/get_data_for_vegetarian_streak_page/" + user,
+      const response = await fetch("http://127.0.0.1:8000/api/get_data_for_vegetarian_streak_page/" + user,
         {
           headers: {
-            method: "GET",
             Accept: "application/json",
           },
         }
@@ -200,10 +162,7 @@ function VegitarianismStreak() {
         { date: "2024-07-12", vegetarian_status: "f" },
         { date: "2024-07-11", vegetarian_status: "f" },
       ];
-      let defaultCalendar = {};
-      calendarData.forEach((day) => {
-        defaultCalendar[day.date] = day.vegetarian_status;
-      });
+      let defaultCalendar = calendarData;
 
       let defaultMeatDays = {
         Mo: 0,
@@ -230,8 +189,8 @@ function VegitarianismStreak() {
 
   return (
     <div>
-      <Top></Top>
-      <Calendar></Calendar>
+      <Top />
+      <Calendar />
       <button onClick={saveChangesInMeatEatingSettings}>Save</button>
     </div>
   );

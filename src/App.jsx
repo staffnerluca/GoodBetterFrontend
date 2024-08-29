@@ -16,6 +16,7 @@ import CoursesList from "./components/CoursesList";
 import Layout from "./components/Layout";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import MoralityChatBot from "./components/MoralityChatbot";
 
 function App({ location }) {
   const noFooter = ["/register", "/"];
@@ -31,6 +32,7 @@ function App({ location }) {
           <Route path="/" Component={Login} />
           <Route path="/courses" Component={Courses} />
           <Route path="/start" Component={CoursesList} />
+          <Route path="moralityChatbot" Component={MoralityChatBot} />
         </Routes>
         {/* {!noFooter.includes(location.pathname) && <Footer />} */}
       </Layout>
@@ -39,7 +41,7 @@ function App({ location }) {
 }
 
 function AppWrapper() {
-  const location = useLocation(); // Now inside the Router context
+  const location = useLocation();
 
   return <App location={location} />;
 }

@@ -7,7 +7,7 @@ const Header = () => {
 
   return (
     <header className="header">
-      <h1>🥦 Vegetarinism Streak: {currentVegStreak}</h1>
+      <h1>🥦 Streak: {currentVegStreak}</h1>
     </header>
   );
 };

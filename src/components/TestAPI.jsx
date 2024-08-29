@@ -37,7 +37,7 @@ const TestAPI = () => {
         { url: '/get_current_course_lesson/', method: 'GET' },
         { url: '/register/', method: 'POST', data: { email: 'new2@example.com', password: 'password', username: 'newuser' } },
         { url: '/create_user_profile/', method: 'POST', data: { first_name: 'John', second_name: 'Doe', username: 'johndoe', country: 'US', birth_date: '1990-01-01', wants_to_become_vegetarian: true } },
-        { url: '/get_data_for_vegetarian_streak_page/?username=username1', method: 'GET' },
+        { url: '/get_data_for_vegetarian_streak_page/username1', method: 'GET' },
         { url: '/create_test_users/', method: 'POST' },
         { url: '/get_all_users/', 
             method: 'GET' },
